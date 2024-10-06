@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SDG 13 Climate Action - Word Search Game">
+    <title>SDG 13: Word Search Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Attractive background pattern */
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2b2b2b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .word-search {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .word-search div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px; /* Increased font size */
+            font-weight: bold;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ccc; /* Slightly darker border */
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .word-search div:hover {
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+
+        .word-search div.selected {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .word-search div.found {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .word-search div.incorrect {
+            background-color: #dc3545; /* Red color for incorrect answers */
+            color: white;
+        }
+
+        .word-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .word-list span {
+            font-size: 16px;
+            margin: 10px;
+            padding: 5px 10px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            text-align: center;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .message {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SDG 13: Climate Action</h1>
+        <h2>Word Search Puzzle</h2>
+
+        <div class="word-search" id="word-search">
+            <!-- Word search grid will be populated with JavaScript -->
+        </div>
+
+        <div class="word-list" id="word-list">
+            <!-- Words to find will be listed here -->
+        </div>
+
+        <div class="controls">
+            <button onclick="resetGame()">Reset Game</button>
+            <button onclick="checkGame()">Check Answers</button>
+        </div>
+
+        <div class="message" id="message"></div>
+        <audio id="correct-sound" src="correct-sound.mp3" preload="auto"></audio> <!-- Sound effect for correct answer -->
+    </div>
+
+    <script>
+        const wordList = ['CLIMATE', 'NASA', 'ACTION', 'CO2', 'WATER', 'ENERGY', 'CHANGE', 'ICE', 'EARTH', 'SEA'];
+        const gridSize = 10;
+        let selectedCells = [];
+        let grid = [];
+        const correctSound = document.getElementById('correct-sound');
+
+        // Generate word search grid
+        function createGrid() {
+            const wordSearchContainer = document.getElementById('word-search');
+            const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            grid = [];
+
+            // Initialize grid with random letters
+            for (let row = 0; row < gridSize; row++) {
+                grid[row] = [];
+                for (let col = 0; col < gridSize; col++) {
+                    const letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+                    grid[row][col] = letter;
+                }
+            }
+
+            // Place words in the grid
+            wordList.forEach(word => placeWordInGrid(word));
+
+            // Render the grid
+            wordSearchContainer.innerHTML = '';
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    const cell = document.createElement('div');
+                    cell.textContent = grid[row][col];
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+                    cell.onclick = () => selectCell(cell);
+                    wordSearchContainer.appendChild(cell);
+                }
+            }
+
+            // Render the word list
+            const wordListContainer = document.getElementById('word-list');
+            wordListContainer.innerHTML = wordList.map(word => `<span>${word}</span>`).join('');
+        }
+
+        // Place word in grid (basic version: horizontal or vertical)
+        function placeWordInGrid(word) {
+            let placed = false;
+            while (!placed) {
+                const isVertical = Math.random() > 0.5;
+                const startRow = Math.floor(Math.random() * gridSize);
+                const startCol = Math.floor(Math.random() * gridSize);
+                
+                if (canPlaceWord(word, startRow, startCol, isVertical)) {
+                    for (let i = 0; i < word.length; i++) {
+                        if (isVertical) {
+                            grid[startRow + i][startCol] = word[i];
+                        } else {
+                            grid[startRow][startCol + i] = word[i];
+                        }
+                    }
+                    placed = true;
+                }
+            }
+        }
+
+        // Check if word fits in the grid
+        function canPlaceWord(word, row, col, isVertical) {
+            if (isVertical) {
+                if (row + word.length > gridSize) return false;
+                for (let i = 0; i < word.length; i++) {
+                    if (grid[row + i][col] !== ' ' && grid[row + i][col] !== grid[row + i][col]) {
+                        return false;
+                    }
+                }
+            } else {
+                if (col + word.length > gridSize) return false;
+                for (let i = 0; i < word.length; i++) {
+                    if (grid[row][col + i] !== ' ' && grid[row][col + i] !== word[i]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // Select cell for word search
+        function selectCell(cell) {
+            if (cell.classList.contains('selected')) {
+                cell.classList.remove('selected');
+                selectedCells = selectedCells.filter(selectedCell => selectedCell !== cell);
+            } else {
+                cell.classList.add('selected');
+                selectedCells.push(cell);
+            }
+        }
+
+        // Check if the words are correct
+        function checkGame() {
+            const message = document.getElementById('message');
+            let correctWords = 0;
+            let selectedWords = [];
+
+            // Extract selected letters
+            selectedCells.forEach(cell => {
+                selectedWords.push(cell.textContent);
+            });
+
+            wordList.forEach(word => {
+                const foundWord = selectedWords.join('').toUpperCase();
+                if (foundWord.includes(word)) {
+                    correctWords++;
+                    selectedCells.forEach(cell => {
+                        if (cell.textContent === word) {
+                            cell.classList.add('found');
+                            correctSound.play(); // Play sound for correct answer
+                        }
+                    });
+                } else {
+                    selectedCells.forEach(cell => {
+                        if (cell.classList.contains('selected')) {
+                            cell.classList.add('incorrect'); // Mark as incorrect
+                        }
+                    });
+                }
+            });
+
+            if (correctWords === wordList.length) {
+                message.textContent
+                message.textContent = "Congratulations! You found all the words!";
+            } else {
+                message.textContent = `${correctWords} out of ${wordList.length} words found.`;
+            }
+        }
+
+        // Reset the game
+        function resetGame() {
+            selectedCells = [];
+            grid = [];
+            document.getElementById('message').textContent = '';
+            createGrid();
+        }
+
+        // Initialize the game on page load
+        window.onload = createGrid;
+    </script>
+</body>
+</html>

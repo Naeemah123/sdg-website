@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #003b33;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: white; /* Updated color to white */
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #00ff99;
+            text-shadow: 0 0 5px #00ff99;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e7f3fe;
+            border: 1px solid #b3d7ff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SDG and Science: Creating a Sustainable Future</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="flashcard.html">SDG Goals</a></li>
+            <li><a href="puzzle.html">SDG Puzzle</a></li>
+            <li><a href="sdg.html">SDG Details</a></li>
+            <li><a href="integration.html">Science Integration</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="impact.html">Impact Calculator</a></li>
+            <li><a href="pledge.html">Pledge Wall</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Carbon Footprint Calculator</h1>
+    <p>Calculate your carbon footprint based on your daily activities.</p>
+
+    <label for="electricity">Daily Electricity Use (kWh):</label>
+    <input type="number" id="electricity" placeholder="e.g., 10">
+
+    <label for="milesDriven">Miles Driven by Car:</label>
+    <input type="number" id="milesDriven" placeholder="e.g., 20">
+
+    <label for="flights">Number of Flights Taken per Year:</label>
+    <input type="number" id="flights" placeholder="e.g., 1">
+
+    <button onclick="calculateCarbonFootprint()">Calculate My Carbon Footprint</button>
+
+    <div class="result" id="result" style="display:none;"></div>
+</div>
+
+<script>
+    function calculateCarbonFootprint() {
+        // Get input values
+        const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+        const milesDriven = parseFloat(document.getElementById('milesDriven').value) || 0;
+        const flights = parseFloat(document.getElementById('flights').value) || 0;
+
+        // Constants for carbon footprint calculation
+        const electricityCarbonFactor = 0.92; // kg CO2 per kWh (average for US)
+        const carCarbonFactor = 0.404; // kg CO2 per mile (average for gas-powered car)
+        const flightCarbonFactor = 0.24; // kg CO2 per passenger mile (average for domestic flight)
+
+        // Calculate carbon footprint
+        const electricityCO2 = electricity * electricityCarbonFactor;
+        const drivingCO2 = milesDriven * carCarbonFactor;
+        const flightsCO2 = flights * 1000 * flightCarbonFactor; // Assuming 1000 miles per flight
+
+        const totalCO2 = electricityCO2 + drivingCO2 + flightsCO2;
+
+        // Compare to global average
+        const globalAverage = 4.8; // Average carbon footprint per person per day in tons (world average)
+
+        // Display results
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+            <strong>Your Estimated Carbon Footprint:</strong> ${totalCO2.toFixed(2)} kg CO2<br>
+            <strong>Global Average Carbon Footprint:</strong> ${(globalAverage * 1000).toFixed(2)} kg CO2<br>
+            <strong>Your footprint is ${(totalCO2 > globalAverage * 1000) ? 'above' : 'below'} the global average.</strong>
+        `;
+    }
+</script>
+
+</body>
+</html>

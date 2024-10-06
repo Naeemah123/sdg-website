@@ -1,0 +1,184 @@
+ /* General body styling */
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Header styling */
+  header {
+    background-color: #003b33;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideDown 1.5s ease-out;
+  }
+
+  /* Slide-down animation for header */
+  @keyframes slideDown {
+    from { transform: translateY(-100px); }
+    to { transform: translateY(0); }
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 2.5em;
+  }
+
+  /* Navbar styling */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    animation: navSlide 1.5s ease-out;
+  }
+
+  /* Nav items sliding in */
+  @keyframes navSlide {
+    from { transform: translateY(-50px); }
+    to { transform: translateY(0); }
+  }
+
+  nav ul li {
+    margin: 0 15px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: #00ff99;
+    text-shadow: 0 0 5px #00ff99;
+  }
+
+  /* Section styling */
+  section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: sectionFadeUp 2s ease-out;
+  }
+
+  /* Fade-up animation for sections */
+  @keyframes sectionFadeUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #003b33;
+    position: relative;
+  }
+
+  section h2::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    background-color: #003b33;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    animation: underlineSlide 1s ease-in-out;
+  }
+
+  /* Slide-in underline effect for h2 */
+  @keyframes underlineSlide {
+    from { width: 0; }
+    to { width: 100px; }
+  }
+
+  section p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+  }
+
+  /* Button styling */
+  button {
+    padding: 10px 20px;
+    background-color: #003b33;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+  }
+
+  button:hover {
+    background-color: #005d5d;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  button:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Infographic styling */
+  .sdg-infographic img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+  }
+
+  .sdg-infographic img:hover {
+    transform: scale(1.1);
+  }
+
+  /* Footer styling */
+  footer {
+    background-color: #003b33;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    animation: fadeInFooter 2s ease-in-out;
+  }
+
+  @keyframes fadeInFooter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  

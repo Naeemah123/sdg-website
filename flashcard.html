@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG Match-Up Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #flashcards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.flashcard {
+    width: 150px; /* Adjust size */
+    height: 200px; /* Adjust size */
+    margin: 15px;
+    perspective: 1000px; /* Enable 3D effect */
+}
+
+.flashcard .front, .flashcard .back {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; /* Text size */
+    text-align: center;
+    color: white; /* Text color */
+    transition: transform 0.6s; /* Animation */
+    position: absolute;
+    backface-visibility: hidden; /* Hide back when showing front */
+}
+
+.flashcard .front {
+    background-color: #004d40; /* Front color */
+}
+
+.flashcard .back {
+    background-color: #f44336; /* Back color */
+    transform: rotateY(180deg); /* Rotate to show back */
+}
+
+.flashcard.flipped .front {
+    transform: rotateY(180deg); /* Show back */
+}
+
+.flashcard.flipped .back {
+    transform: rotateY(0); /* Show front */
+}
+
+.flashcard .back {
+  background-color: transparent; /* Remove background color */
+}
+
+.flashcard .back .text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background-color: rgba(0, 0, 255, 0.2); 
+  font-size: 18px;
+  text-align: center;
+  z-index: 1; /* Ensure text is above the image */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Learn SDG goals</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="flashcard.html">SDG goals</a></li>
+                <li><a href="puzzle.html">SDG puzzle</a></li>
+                <li><a href="sdg.html">SDG Details</a></li>
+                <li><a href="integration.html">Science Integration</a></li>
+                <li><a href="tools.html">Tools</a></li>
+                <li><a href="impact.html">Impact Calculator</a></li>
+                <li><a href="pledge.html">Pledge Wall</a></li>
+              </ul>
+        </nav>
+    </header>
+
+    <div id="flashcards-container">
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+              <h3>What is SDG 1?</h3>
+            </div>
+            <div class="back">
+              <img src="game/1.jpg" alt="SDG 1 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>No Poverty</h3>
+              </div>
+            </div>
+          </div>
+      
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 2?</h3>
+            </div>
+            <div class="back">
+                <img src="game/2.jpg" alt="SDG 2 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Zero Hunger</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 3?</h3>
+            </div>
+            <div class="back">
+                <img src="game/3.jpg" alt="SDG 3 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Good Health and Well-being</h3>
+            </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 4?</h3>
+            </div>
+            <div class="back">
+                <img src="game/4.jpg" alt="SDG 4 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Quality Education</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 5?</h3>
+            </div>
+            <div class="back">
+                <img src="game/5.jpg" alt="SDG 5 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Gender Equality</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 6?</h3>
+            </div>
+            <div class="back">
+                <img src="game/6.jpg" alt="SDG 6 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Clean Water and Sanitation</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 7?</h3>
+            </div>
+            <div class="back">
+                <img src="game/7.jpg" alt="SDG 7 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Affordable and Clean Energy</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 8?</h3>
+            </div>
+            <div class="back">
+                <img src="game/8.jpg" alt="SDG 8 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Decent Work and Economic Growth</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 9?</h3>
+            </div>
+            <div class="back">
+                <img src="game/9.jpg" alt="SDG 9 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Industry, Innovation and Infrastructure</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 10?</h3>
+            </div>
+            <div class="back">
+                <img src="game/10.jpg" alt="SDG 10 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Reduced Inequalities</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 11?</h3>
+            </div>
+            <div class="back">
+                <img src="game/11.jpg" alt="SDG 11 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Sustainable Cities and Communities</h3>
+                </div>
+            </div>
+        </div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="front">
+                <h3>What is SDG 12?</h3>
+            </div>
+            <div class="back">
+                <img src="game/12.jpg" alt="SDG 12 Image" style="width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px);"> <div class="text-overlay">
+                <h3>Responsible Consumption and Production</h3>
+                </div>
+            </div>
+        </div>
+   <body>
+ </html>

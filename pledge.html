@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pledge Wall</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #003b33;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            background-color: #003b33;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .pledge-form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #003b33;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005d5d;
+        }
+
+        .pledge-list {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .pledge-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 4px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .pledge-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* Different background colors for each SDG */
+        .sdg-1 { background-color: #D9534F; }
+        .sdg-2 { background-color: #F0AD4E; }
+        .sdg-3 { background-color: #5CB85C; }
+        .sdg-4 { background-color: #5BC0DE; }
+        .sdg-5 { background-color: #E67399; }
+        .sdg-6 { background-color: #20B2AA; }
+        .sdg-7 { background-color: #FFCC00; }
+        .sdg-8 { background-color: #F39C12; }
+        .sdg-9 { background-color: #E67E22; }
+        .sdg-10 { background-color: #C0392B; }
+        .sdg-11 { background-color: #9B59B6; }
+        .sdg-12 { background-color: #D4AC0D; }
+        .sdg-13 { background-color: #20C997; }
+        .sdg-14 { background-color: #1F618D; }
+        .sdg-15 { background-color: #27AE60; }
+        .sdg-16 { background-color: #2980B9; }
+        .sdg-17 { background-color: #8E44AD; }
+
+        footer {
+            background-color: #003b33;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SDG and Science: Creating a Sustainable Future</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="flashcard.html">SDG goals</a></li>
+            <li><a href="puzzle.html">SDG puzzle</a></li>
+            <li><a href="sdg.html">SDG Details</a></li>
+            <li><a href="integration.html">Science Integration</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="impact.html">Impact Calculator</a></li>
+            <li><a href="pledge.html">Pledge Wall</a></li>
+        </ul>
+    </nav>
+
+    <section class="pledge-form">
+        <h2>Make a Pledge</h2>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <select id="sdg" required>
+            <option value="">Select an SDG</option>
+            <option value="1">No Poverty</option>
+            <option value="2">Zero Hunger</option>
+            <option value="3">Good Health and Well-being</option>
+            <option value="4">Quality Education</option>
+            <option value="5">Gender Equality</option>
+            <option value="6">Clean Water and Sanitation</option>
+            <option value="7">Affordable and Clean Energy</option>
+            <option value="8">Decent Work and Economic Growth</option>
+            <option value="9">Industry, Innovation and Infrastructure</option>
+            <option value="10">Reduced Inequality</option>
+            <option value="11">Sustainable Cities and Communities</option>
+            <option value="12">Responsible Consumption and Production</option>
+            <option value="13">Climate Action</option>
+            <option value="14">Life Below Water</option>
+            <option value="15">Life on Land</option>
+            <option value="16">Peace, Justice and Strong Institutions</option>
+            <option value="17">Partnerships for the Goals</option>
+        </select>
+        <input type="text" id="pledge" placeholder="Your Pledge" required>
+        <button onclick="submitPledge()">Submit Pledge</button>
+    </section>
+
+    <div class="pledge-list">
+        <h2>Pledges Made</h2>
+        <div id="pledges"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SDG Pledge Wall. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function submitPledge() {
+            const name = document.getElementById("name").value;
+            const sdg = document.getElementById("sdg").value;
+            const pledge = document.getElementById("pledge").value;
+
+            if (name && sdg && pledge) {
+                const pledgesDiv = document.getElementById("pledges");
+                const pledgeItem = document.createElement("div");
+                pledgeItem.classList.add("pledge-item", `sdg-${sdg}`);
+                pledgeItem.innerHTML = `<h3>${name} (SDG ${sdg})</h3><p>${pledge}</p>`;
+                pledgesDiv.appendChild(pledgeItem);
+
+                document.getElementById("name").value = '';
+                document.getElementById("sdg").value = '';
+                document.getElementById("pledge").value = '';
+            } else {
+                alert("Please fill in all fields before submitting.");
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
